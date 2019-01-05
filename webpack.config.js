@@ -8,7 +8,7 @@ module.exports = {
     index: './src/index.js'    
   },  
   output: {
-    path: path.resolve(__dirname, 'out'),
+    path: path.resolve(__dirname),
     filename: './bundle-[hash].js',
   },
   module: {
@@ -36,7 +36,8 @@ module.exports = {
   watch: false,
   plugins: [
     new UglifyJSPlugin({ 
-      sourceMap: true
+      sourceMap: false,
+      parallel: true
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html'
