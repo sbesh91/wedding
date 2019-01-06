@@ -1,4 +1,3 @@
-import '@webcomponents/webcomponentsjs/webcomponents-bundle';
 import { LitElement, html } from '@polymer/lit-element/lit-element';
 import { installRouter } from 'pwa-helpers/router';
 import { routes, navigate, generatePageTransitionAnimation, generateHeroTransitionAnimation, generateBaseLoadAnimation} from './app';
