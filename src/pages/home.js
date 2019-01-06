@@ -25,8 +25,6 @@ class HomePage extends LitElement {
   }
 
   clickRsvp(e) {
-    const el = this.shadowRoot.querySelectorAll('img');
-    console.log(el[0]);
     generateHeroOverlayAnimation(this.shadowRoot.querySelector('#form'), e.target, this.shadowRoot.querySelector('#grid'));
   }
 
