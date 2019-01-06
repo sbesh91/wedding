@@ -1,7 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element/lit-element';
 import { generateHeroOverlayAnimation, generatePageTransitionAnimation } from '../app';
 import '@material/mwc-ripple';
-import lozad from 'lozad'
+import 'intersection-observer/intersection-observer';
 
 // import * as animateCSSGrid from 'animate-css-grid';
 
@@ -22,15 +22,11 @@ class HomePage extends LitElement {
   firstUpdated() {
     // this.grid = this.shadowRoot.querySelector('#grid');
     // animateCSSGrid.wrapGrid(this.grid, { duration: 300, stagger: 10, easing: 'easeInOut' });
-    const el = this.shadowRoot.querySelectorAll('img');
-    const observer = lozad(el, {
-      rootMargin: '10px 0px',
-      threshold: 0.1
-    });
-    observer.observe();
   }
 
   clickRsvp(e) {
+    const el = this.shadowRoot.querySelectorAll('img');
+    console.log(el[0]);
     generateHeroOverlayAnimation(this.shadowRoot.querySelector('#form'), e.target, this.shadowRoot.querySelector('#grid'));
   }
 
@@ -60,7 +56,7 @@ class HomePage extends LitElement {
       #grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-        grid-auto-rows: 1fr;
+        grid-auto-rows: minmax(1fr, auto);
         grid-gap: .5rem;
         grid-auto-flow: dense;
 
@@ -68,36 +64,38 @@ class HomePage extends LitElement {
         min-height: 100vh;
         transition: 300ms opacity ease;
       }
+
       #form {
         background: white;
+        z-index: 10000;
         border-radius: 4px;
         box-shadow: 0 3px 6px rgba(114,47,55,0.16), 0 3px 6px rgba(114,47,55,0.23);
         position: fixed;
-        top: calc(50% - 250px);
+        top: 25vh;
         left: calc(50% - 160px);
         height: 500px;
         width: 320px;
         pointer-events: none;
         opacity: 0;
       }
+
       #rsvp {
         grid-column: 1 / -1;
         grid-row: 1;
         display: flex;
         justify-content: center;
         align-items: center;
-        /* position: relative; */
       }
       #rsvp div {
         width: 18rem;
-        height: 8rem;
-        font-size: 5rem;
-        line-height: 5rem;
+        height: 5rem;
+        font-size: 3rem;
+        line-height: 3rem;
         color: #616161;
         border-radius: 4px;
         border: none;
         box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
-        background-image: linear-gradient(90deg, #c3922e 0%, #eed688 40%, #fffbcc 80%, #eed688 100%);
+        background-image: linear-gradient(90deg, #eed688 0%, #fffbcc 51%, #eed688 100%);
         pointer-events: auto;
         display: flex;
         justify-content: center;
@@ -127,18 +125,22 @@ class HomePage extends LitElement {
       img {
         pointer-events: none;
         width: 100%;
-        opacity: 0;
-        transform: scale(.9, .9);
+        opacity: 1;
+        /* transform: scale(.9, .9); */
         transition: 300ms ease;
       }
 
-      img[data-loaded="true"] {
+      img.active {
         opacity: 1;
-        transform: scale(1, 1);
+        /* transform: scale(1, 1); */
       }
     </style>
-
-
+    <div id="form">
+      <span>
+        some form here
+      </span>
+      <button @click="${(e) => this.close(e)}">close</button>
+    </div>
     <section id="grid">
       <div id="rsvp">
         <div @click="${(e) => this.clickRsvp(e)}">
@@ -149,16 +151,10 @@ class HomePage extends LitElement {
 
       ${this.images.map(i => html`
         <main class="${this.getCardClass(i)}"> 
-          <img class="lozad" data-src="./src/photos/${i}.jpg">
+          <img data-toggle-class="active" src="./src/photos/${i}.jpg">
         </main>
       `)}      
     </section>
-    <div id="form">
-      <span>
-        some form here
-      </span>
-      <button @click="${(e) => this.close(e)}">close</button>
-    </div>
     `;
   }
 }

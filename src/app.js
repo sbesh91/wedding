@@ -22,6 +22,19 @@ export const load = async (route) => {
   }
 }
 
+export const buildThresholdList = (steps = 20) => {
+  var thresholds = [];
+  var numSteps = steps;
+
+  for (var i=1.0; i<=numSteps; i++) {
+    var ratio = i/numSteps;
+    thresholds.push(ratio);
+  }
+
+  thresholds.push(0);
+  return thresholds;
+}
+
 const generateBaseHero = (toNode, fromNode, duration) => {
   const fromRect = fromNode.getBoundingClientRect();
   const toRect = toNode.getBoundingClientRect();
@@ -31,7 +44,7 @@ const generateBaseHero = (toNode, fromNode, duration) => {
   const deltaHeight = fromRect.height / toRect.height;
 
   const animationTimingConfig = {
-    fill: 'forwards',
+    fill: 'none',
     easing: "cubic-bezier(0.4, 0.0, 0.2, 1)",
     duration: duration,
     delay: 150
@@ -77,17 +90,32 @@ export const generateHeroOverlayAnimation = (toNode, fromNode, parentNode) => {
   toNode.style.pointerEvents = 'auto';
   parentNode.style.filter = 'blur(5px)';
   parentNode.style.opacity = .8;
-  
 
-  toNode.animate(config.frames, config.animationTimingConfig);
+  const animation = toNode.animate(config.frames, config.animationTimingConfig);
+
+  animation.onfinish = () => {
+    toNode.style.opacity = 1;
+  };
 }
 
-export const generatePageTransitionAnimation = (node, direction = 'forwards') => {
+export const generatePageTransitionAnimation = async (node, direction = 'forwards') => {
   const duration = 350;
-  const baseFrame = { 'transform': 'none', 'opacity': 1 };
-  const modFrame = { 'transform': 'translate(0px,-50px)', 'opacity': 0 };
+  const clipStart = 'inset(10% 5% 10% 5%)';
+  const clipEnd = 'inset(-6px -6px -6px -6px)';
+  const baseFrame = { 
+    // 'transform': 'none',
+    'clipPath': clipEnd,
+    '-webkitClipPath': clipEnd,
+    'opacity': 1 
+  };
+  const modFrame = { 
+    // 'transform': 'translateY(-50px)',
+    'clipPath': clipStart,
+    '-webkitClipPath': clipStart,
+    'opacity': 0 
+  };
   const animationTimingConfig = {
-    fill: 'both',
+    fill: 'none',
     easing: "cubic-bezier(0.4, 0.0, 0.2, 1)",
     duration: duration
   };
@@ -100,7 +128,14 @@ export const generatePageTransitionAnimation = (node, direction = 'forwards') =>
     node.style.pointerEvents = 'none';
   }
   
-  node.animate(frames, animationTimingConfig);
+  const animation = node.animate(frames, animationTimingConfig);
+  animation.onfinish = () => {
+    if (direction === 'forwards') {
+      node.style.opacity = 1;
+    } else {
+      node.style.opacity = 0;
+    }
+  };
 }
 
 export const generateBaseLoadAnimation = (node, direction = 'forwards') => {
@@ -108,7 +143,7 @@ export const generateBaseLoadAnimation = (node, direction = 'forwards') => {
   const baseFrame = { 'opacity': 1 };
   const modFrame = { 'opacity': 0 };
   const animationTimingConfig = {
-    fill: 'forwards',
+    fill: 'none',
     easing: "cubic-bezier(0.4, 0.0, 0.2, 1)",
     duration: duration
   };
@@ -120,5 +155,13 @@ export const generateBaseLoadAnimation = (node, direction = 'forwards') => {
     frames = [baseFrame, modFrame]
   }
 
-  node.animate(frames, animationTimingConfig);
+  const animation = node.animate(frames, animationTimingConfig);
+
+  animation.onfinish = () => {
+    if (direction === 'forwards') {
+      node.style.opacity = 1;
+    } else {
+      node.style.opacity = 0;
+    }
+  };
 }
