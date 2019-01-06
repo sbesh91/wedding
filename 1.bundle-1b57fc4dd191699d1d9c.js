@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(e,r,t){"use strict";t.r(r);var i=t(1),o=t(0);t(32),customElements.define("home-page",class extends i.a{constructor(){super(),this.images=[];for(let e=1;e<25;e++)this.images.push(e)}firstUpdated(){}clickRsvp(e){Object(o.b)(this.shadowRoot.querySelector("#form"),e.target,this.shadowRoot.querySelector("#grid"))}close(e){const r=this.shadowRoot.querySelector("#form"),t=this.shadowRoot.querySelector("#grid");Object(o.c)(r,"backwards"),r.style.pointerEvents="none",t.style.opacity=1,t.style.filter="none"}getCardClass(e){return["card--base","card--base","card--expanded","card--base","card--base"][e%5]}render(){return i["b"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(e,r,t){"use strict";t.r(r);var i=t(1),o=t(0),s=(t(33),t(7)),a=t.n(s);customElements.define("home-page",class extends i.a{constructor(){super(),this.images=[];for(let e=1;e<25;e++)this.images.push(e)}firstUpdated(){const e=this.shadowRoot.querySelectorAll("img");a()(e,{rootMargin:"10px 0px",threshold:.1}).observe()}clickRsvp(e){Object(o.b)(this.shadowRoot.querySelector("#form"),e.target,this.shadowRoot.querySelector("#grid"))}close(e){const r=this.shadowRoot.querySelector("#form"),t=this.shadowRoot.querySelector("#grid");Object(o.c)(r,"backwards"),r.style.pointerEvents="none",t.style.opacity=1,t.style.filter="none"}getCardClass(e){return["card--base","card--base","card--expanded","card--base","card--base"][e%5]}render(){return i["b"]`
     <style>
       :host {
         width: 100%;
@@ -73,6 +73,14 @@
       img {
         pointer-events: none;
         width: 100%;
+        opacity: 0;
+        transform: scale(.9, .9);
+        transition: 300ms ease;
+      }
+
+      img[data-loaded="true"] {
+        opacity: 1;
+        transform: scale(1, 1);
       }
     </style>
 
@@ -87,7 +95,7 @@
 
       ${this.images.map(e=>i["b"]`
         <main class="${this.getCardClass(e)}"> 
-          <img src="./src/photos/${e}.jpg">
+          <img class="lozad" data-src="./src/photos/${e}.jpg">
         </main>
       `)}      
     </section>
@@ -97,4 +105,4 @@
       </span>
       <button @click="${e=>this.close(e)}">close</button>
     </div>
-    `}})},7:function(e,r,t){var i={"./1.jpg":[8,4],"./10.jpg":[9,5],"./11.jpg":[10,6],"./12.jpg":[11,7],"./13.jpg":[12,8],"./14.jpg":[13,9],"./15.jpg":[14,10],"./16.jpg":[15,11],"./17.jpg":[16,12],"./18.jpg":[17,13],"./19.jpg":[18,14],"./2.jpg":[19,15],"./20.jpg":[20,16],"./21.jpg":[21,17],"./22.jpg":[22,18],"./23.jpg":[23,19],"./24.jpg":[24,20],"./3.jpg":[25,21],"./4.jpg":[26,22],"./5.jpg":[27,23],"./6.jpg":[28,24],"./7.jpg":[29,25],"./8.jpg":[30,26],"./9.jpg":[31,27]};function o(e){var r=i[e];return r?t.e(r[1]).then(function(){var e=r[0];return t.t(e,7)}):Promise.resolve().then(function(){var r=new Error("Cannot find module '"+e+"'");throw r.code="MODULE_NOT_FOUND",r})}o.keys=function(){return Object.keys(i)},o.id=7,e.exports=o}}]);
+    `}})},8:function(e,r,t){var i={"./1.jpg":[9,4],"./10.jpg":[10,5],"./11.jpg":[11,6],"./12.jpg":[12,7],"./13.jpg":[13,8],"./14.jpg":[14,9],"./15.jpg":[15,10],"./16.jpg":[16,11],"./17.jpg":[17,12],"./18.jpg":[18,13],"./19.jpg":[19,14],"./2.jpg":[20,15],"./20.jpg":[21,16],"./21.jpg":[22,17],"./22.jpg":[23,18],"./23.jpg":[24,19],"./24.jpg":[25,20],"./3.jpg":[26,21],"./4.jpg":[27,22],"./5.jpg":[28,23],"./6.jpg":[29,24],"./7.jpg":[30,25],"./8.jpg":[31,26],"./9.jpg":[32,27]};function o(e){var r=i[e];return r?t.e(r[1]).then(function(){var e=r[0];return t.t(e,7)}):Promise.resolve().then(function(){var r=new Error("Cannot find module '"+e+"'");throw r.code="MODULE_NOT_FOUND",r})}o.keys=function(){return Object.keys(i)},o.id=8,e.exports=o}}]);
