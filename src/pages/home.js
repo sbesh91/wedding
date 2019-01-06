@@ -1,6 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element/lit-element';
 import { generateHeroOverlayAnimation, generatePageTransitionAnimation } from '../app';
-import { ripple } from '@material/mwc-ripple';
+import '@material/mwc-ripple';
+import lozad from 'lozad'
 
 // import * as animateCSSGrid from 'animate-css-grid';
 
@@ -21,6 +22,12 @@ class HomePage extends LitElement {
   firstUpdated() {
     // this.grid = this.shadowRoot.querySelector('#grid');
     // animateCSSGrid.wrapGrid(this.grid, { duration: 300, stagger: 10, easing: 'easeInOut' });
+    const el = this.shadowRoot.querySelectorAll('img');
+    const observer = lozad(el, {
+      rootMargin: '10px 0px',
+      threshold: 0.1
+    });
+    observer.observe();
   }
 
   clickRsvp(e) {
@@ -120,6 +127,14 @@ class HomePage extends LitElement {
       img {
         pointer-events: none;
         width: 100%;
+        opacity: 0;
+        transform: scale(.9, .9);
+        transition: 300ms ease;
+      }
+
+      img[data-loaded="true"] {
+        opacity: 1;
+        transform: scale(1, 1);
       }
     </style>
 
@@ -134,7 +149,7 @@ class HomePage extends LitElement {
 
       ${this.images.map(i => html`
         <main class="${this.getCardClass(i)}"> 
-          <img src="./src/photos/${i}.jpg">
+          <img class="lozad" data-src="./src/photos/${i}.jpg">
         </main>
       `)}      
     </section>

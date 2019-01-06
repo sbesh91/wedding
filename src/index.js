@@ -113,6 +113,8 @@ class AppShell extends LitElement {
         opacity: 0;
         top: 0;
         left: 0;
+        max-height: 50vh;
+        overflow: hidden;
       }
 
       header {
@@ -128,6 +130,8 @@ class AppShell extends LitElement {
 
       .active {
         position: relative;
+        max-height: none;
+        overflow: auto;
         pointer-events: auto !important;
         opacity: 1 !important;
       }
