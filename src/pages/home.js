@@ -1,9 +1,11 @@
-import { LitElement, html } from '@polymer/lit-element/lit-element';
-import { generateHeroOverlayAnimation, generatePageTransitionAnimation } from '../app';
+import { LitElement, html } from 'lit-element/lit-element';
+import { generateHeroOverlayAnimation, generatePageTransitionAnimation, generateFlipAnimation } from '../app';
 import '@material/mwc-ripple';
 import '@polymer/iron-form/iron-form';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-button/paper-button';
+import '@polymer/paper-radio-group/paper-radio-group';
+import '@polymer/paper-radio-button/paper-radio-button';
 import 'intersection-observer/intersection-observer';
 
 // import * as animateCSSGrid from 'animate-css-grid';
@@ -31,6 +33,19 @@ class HomePage extends LitElement {
     generateHeroOverlayAnimation(this.shadowRoot.querySelector('#form'), e.target, this.shadowRoot.querySelector('#grid'));
   }
 
+  rsvpChange(e) {
+    const value = e.target.value;
+    if (value === 'yes' && value !== this.rsvp) {
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'));
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'), 'backwards');
+    } else if (value === 'no' && value !== this.rsvp && this.rsvp) {
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'), 'backwards');
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'));
+    }
+
+    this.rsvp = value;
+  }
+
   close(e) {
     const form = this.shadowRoot.querySelector('#form');
     const grid = this.shadowRoot.querySelector('#grid');
@@ -38,15 +53,26 @@ class HomePage extends LitElement {
     form.style.pointerEvents = 'none';
     grid.style.opacity = 1;
     grid.style.filter = 'none';
+
+    const ironForm = this.shadowRoot.querySelector('iron-form');
+    ironForm.reset();
+    generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'), 'backwards');
+    generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'));
+    this.rsvp = undefined;
   }
 
   async submit(e) {
     const ironForm = this.shadowRoot.querySelector('iron-form');
     const form = ironForm.querySelector('form');
-    ironForm.validate();
+
+    if(ironForm.validate()) {
+
+      this.close(e);
+    } else {
+      console.log('invalid form')
+    }
     
 
-    // this.close(e);
   }
 
   getCardClass(index) {
@@ -121,7 +147,7 @@ class HomePage extends LitElement {
       form {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 4rem 4rem 4rem 4rem 1fr;
+        grid-template-rows: 4rem 4rem 3rem 16rem 1fr;
       }
 
       .input paper-input {
@@ -173,8 +199,37 @@ class HomePage extends LitElement {
         /* transform: scale(1, 1); */
       }
 
+      .food-options {
+        position: relative;
+      }
+
+      .food-options .frontface,
+      .food-options .backface {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, .5);
+      }
+
+      .food-options .frontface {
+        transform: rotateY(180deg);
+      }
+
+      .food-options .backface {
+        opacity: 1;
+        filter: blur(5px);
+      }
+
       paper-input {
         --paper-input-container-focus-color: var(--primary);
+      }
+      paper-radio-button {
+        --paper-radio-button-checked-color: var(--primary);
+        --paper-radio-button-checked-ink-color: var(--primary);
       }
     </style>
     <div id="form">
@@ -184,21 +239,41 @@ class HomePage extends LitElement {
             <paper-input name="name_one" label="Respondent One" required></paper-input>
           </div>
           <div class="input">
-            <paper-input name="dinner_one" label="" placeholder></paper-input>
-          </div>
-          <div class="input">
             <paper-input name="name_two" label="Respondent Two" placeholder></paper-input>  
           </div>
-          <div class="input">
-            <paper-input name="dinner_two" label="" placeholder></paper-input>
-          </div>
           <div>
-            <paper-input name="rsvp" label="" placeholder></paper-input>
+            <div>
+              Will you be joining us for the night?
+            </div>
+            <paper-radio-group @change="${(e) => this.rsvpChange(e)}">  
+              <paper-radio-button name="rsvp_yes" value="yes">Yes</paper-radio-button>
+              <paper-radio-button name="rsvp_no" value="no">No</paper-radio-button>
+            </paper-radio-group>
+          </div>
+          
+          <div class="food-options">
+            <div class="frontface">
+              <div class="input">
+                <paper-input name="dinner_one" label="" placeholder></paper-input>
+              </div>
+              <div class="input">
+                <paper-input name="dinner_two" label="" placeholder></paper-input>
+              </div>
+            </div>
+            <div class="backface">
+              <div class="input">
+                <paper-input name="dinner_one" label="" placeholder></paper-input>
+              </div>
+              <div class="input">
+                <paper-input name="dinner_two" label="" placeholder></paper-input>
+              </div>
+            </div>
           </div>
 
+
           <div class="submit">
-            <paper-button elevated @click="${(e) => this.close(e)}">Close</paper-button>
-            <paper-button elevated @click="${(e) => this.submit(e)}">Submit</m-button>
+            <paper-button @click="${(e) => this.close(e)}">Close</paper-button>
+            <paper-button @click="${(e) => this.submit(e)}">Submit</m-button>
           </div>
         </form>
       </iron-form>

@@ -12,14 +12,14 @@
   "license": "ISC",
   "devDependencies": {
     "@material/mwc-ripple": "^0.1.0",
-    "@polymer/lit-element": "^0.6.4",
+    "lit-element": "^2.0.0-rc.2",
     "@webcomponents/webcomponentsjs": "^2.2.1",
     "animate-css-grid": "^1.0.4",
     "css-loader": "^2.0.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "3.2.0",
     "intersection-observer": "^0.5.1",
-    "lit-html": "^0.14.0",
+    "lit-html": "^1.0.0-rc.2",
     "page": "^1.11.3",
     "pwa-helpers": "^0.9.0",
     "style-loader": "^0.23.1",
@@ -30,7 +30,9 @@
     "webpack-dev-server": "3.1.5",
     "@polymer/paper-input": "^3.0.1",
     "@polymer/iron-form": "^3.0.1",
-    "@polymer/paper-button": "^3.0.1"
+    "@polymer/paper-button": "^3.0.1",
+    "@polymer/paper-radio-button": "^3.0.1",
+    "@polymer/paper-radio-group": "^3.0.1"
   },
   "dependencies": {}
 }
