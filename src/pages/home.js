@@ -1,6 +1,9 @@
 import { LitElement, html } from '@polymer/lit-element/lit-element';
 import { generateHeroOverlayAnimation, generatePageTransitionAnimation } from '../app';
 import '@material/mwc-ripple';
+import '@polymer/iron-form/iron-form';
+import '@polymer/paper-input/paper-input';
+import '@polymer/paper-button/paper-button';
 import 'intersection-observer/intersection-observer';
 
 // import * as animateCSSGrid from 'animate-css-grid';
@@ -37,6 +40,12 @@ class HomePage extends LitElement {
     grid.style.filter = 'none';
   }
 
+  async submit(e) {
+    this.shadowRoot.querySelector('iron-form').submit();
+
+    // this.close(e);
+  }
+
   getCardClass(index) {
     // const rand = Math.floor(Math.random() * 4);
     const classes = ['card--base', 'card--base', 'card--expanded', 'card--base', 'card--base'];
@@ -67,7 +76,7 @@ class HomePage extends LitElement {
         background: white;
         z-index: 10000;
         border-radius: 4px;
-        box-shadow: 0 3px 6px rgba(114,47,55,0.16), 0 3px 6px rgba(114,47,55,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         position: fixed;
         top: 25vh;
         left: calc(50% - 160px);
@@ -75,6 +84,7 @@ class HomePage extends LitElement {
         width: 320px;
         pointer-events: none;
         opacity: 0;
+        padding: 1rem;
       }
 
       #rsvp {
@@ -93,12 +103,39 @@ class HomePage extends LitElement {
         border-radius: 4px;
         border: none;
         box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
-        background-image: linear-gradient(90deg, #eed688 0%, #fffbcc 51%, #eed688 100%);
+        background-image: var(--button-style);
         pointer-events: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
+      }
+
+      iron-form, form {
+        height: 100%;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 4rem 4rem 4rem 4rem 1fr;
+      }
+
+      .input paper-input {
+        --paper-input-container: {
+          font-family: 'Lato', sans-serif;
+          font-weight: 400;
+        }
+      }
+
+      .submit {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+
+      .submit paper-button {
+
       }
 
       .card--expanded {
@@ -132,12 +169,36 @@ class HomePage extends LitElement {
         opacity: 1;
         /* transform: scale(1, 1); */
       }
+
+      paper-input {
+        --paper-input-container-focus-color: var(--primary);
+      }
     </style>
     <div id="form">
-      <span>
-        some form here
-      </span>
-      <button @click="${(e) => this.close(e)}">close</button>
+      <iron-form>
+        <form method="GET" action="https://script.google.com/macros/s/AKfycbwhPhp2d6x0lhYi7vkEGNJOONuIHngT-GZn_BAqudk-vJegxksE/exec">
+          <div class="input">
+            <paper-input name="name_one" label="Respondent One" required></paper-input>
+          </div>
+          <div class="input">
+            <paper-input name="dinner_one" label="" placeholder></paper-input>
+          </div>
+          <div class="input">
+            <paper-input name="name_two" label="Respondent Two" placeholder></paper-input>  
+          </div>
+          <div class="input">
+            <paper-input name="dinner_two" label="" placeholder></paper-input>
+          </div>
+          <div>
+            <paper-input name="rsvp" label="" placeholder></paper-input>
+          </div>
+
+          <div class="submit">
+            <paper-button elevated @click="${(e) => this.close(e)}">Close</paper-button>
+            <paper-button elevated @click="${(e) => this.submit(e)}">Submit</m-button>
+          </div>
+        </form>
+      </iron-form>
     </div>
     <section id="grid">
       <div id="rsvp">
