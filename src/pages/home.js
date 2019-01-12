@@ -41,7 +41,10 @@ class HomePage extends LitElement {
   }
 
   async submit(e) {
-    this.shadowRoot.querySelector('iron-form').submit();
+    const ironForm = this.shadowRoot.querySelector('iron-form');
+    const form = ironForm.querySelector('form');
+    ironForm.validate();
+    
 
     // this.close(e);
   }
