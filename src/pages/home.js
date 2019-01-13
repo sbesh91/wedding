@@ -46,6 +46,11 @@ class HomePage extends LitElement {
     this.rsvp = value;
   }
 
+  dinnerClick(e, clazz) {
+    const dinners = this.shadowRoot.querySelectorAll(clazz);
+    dinners.forEach(n => n !== e.target && n.removeAttribute('active'));
+  }
+
   close(e) {
     const form = this.shadowRoot.querySelector('#form');
     const grid = this.shadowRoot.querySelector('#grid');
@@ -65,13 +70,13 @@ class HomePage extends LitElement {
     const ironForm = this.shadowRoot.querySelector('iron-form');
     const form = ironForm.querySelector('form');
 
-    if(ironForm.validate()) {
+    if (ironForm.validate()) {
 
       this.close(e);
     } else {
       console.log('invalid form')
     }
-    
+
 
   }
 
@@ -113,7 +118,7 @@ class HomePage extends LitElement {
         width: 320px;
         pointer-events: none;
         opacity: 0;
-        padding: 1rem;
+        padding: 0 1rem 1rem 1rem;
       }
 
       #rsvp {
@@ -147,7 +152,7 @@ class HomePage extends LitElement {
       form {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 4rem 4rem 3rem 16rem 1fr;
+        grid-template-rows: 4rem 4rem 3rem 18rem 1fr;
       }
 
       .input paper-input {
@@ -224,12 +229,47 @@ class HomePage extends LitElement {
         filter: blur(5px);
       }
 
+      .food-options paper-button {
+        --paper-button: {
+          font-size: .8rem;
+        };
+      }
+
+      .food-options .description {
+        font-size: .9rem;
+        line-height: 1rem;
+      }
+
+      .food-options .input{
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-gap: .5rem;
+        padding: .5rem 0;
+      }
+
+      .food-options h3 {
+        margin: .5rem 0;
+        font-weight: 300;
+        border-bottom: 1px solid var(--primary);
+        padding: .5rem 0;
+        font-size: 1rem;
+      }
+
       paper-input {
         --paper-input-container-focus-color: var(--primary);
       }
       paper-radio-button {
         --paper-radio-button-checked-color: var(--primary);
         --paper-radio-button-checked-ink-color: var(--primary);
+      }
+      paper-button {
+        --paper-button-ink-color: var(--accent);
+        --paper-button: {
+          text-transform: none;
+        }
+      }
+      paper-button[toggles][active] {
+        background: var(--primary);
       }
     </style>
     <div id="form">
@@ -253,19 +293,59 @@ class HomePage extends LitElement {
           
           <div class="food-options">
             <div class="frontface">
+              <h3>Respondent One's Dinner</h3>
               <div class="input">
-                <paper-input name="dinner_one" label="" placeholder></paper-input>
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Chicken</paper-button>
               </div>
               <div class="input">
-                <paper-input name="dinner_two" label="" placeholder></paper-input>
+                <div class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Veggie</paper-button>
+              </div>
+              <h3>Respondent Two's Dinner</h3>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-two" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Chicken</paper-button>
+              </div>
+              <div class="input">
+                <div class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-two" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Veggie</paper-button>
               </div>
             </div>
             <div class="backface">
+              <h3>Respondent One's Dinner</h3>
               <div class="input">
-                <paper-input name="dinner_one" label="" placeholder></paper-input>
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Chicken</paper-button>
               </div>
               <div class="input">
-                <paper-input name="dinner_two" label="" placeholder></paper-input>
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Veggie</paper-button>
+              </div>
+              <h3>Respondent Two's Dinner</h3>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Chicken</paper-button>
+              </div>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Veggie</paper-button>
               </div>
             </div>
           </div>
