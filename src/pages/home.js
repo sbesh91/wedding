@@ -1,6 +1,11 @@
-import { LitElement, html } from '@polymer/lit-element/lit-element';
-import { generateHeroOverlayAnimation, generatePageTransitionAnimation } from '../app';
+import { LitElement, html } from 'lit-element/lit-element';
+import { generateHeroOverlayAnimation, generatePageTransitionAnimation, generateFlipAnimation } from '../app';
 import '@material/mwc-ripple';
+import '@polymer/iron-form/iron-form';
+import '@polymer/paper-input/paper-input';
+import '@polymer/paper-button/paper-button';
+import '@polymer/paper-radio-group/paper-radio-group';
+import '@polymer/paper-radio-button/paper-radio-button';
 import 'intersection-observer/intersection-observer';
 
 // import * as animateCSSGrid from 'animate-css-grid';
@@ -28,6 +33,24 @@ class HomePage extends LitElement {
     generateHeroOverlayAnimation(this.shadowRoot.querySelector('#form'), e.target, this.shadowRoot.querySelector('#grid'));
   }
 
+  rsvpChange(e) {
+    const value = e.target.value;
+    if (value === 'yes' && value !== this.rsvp) {
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'));
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'), 'backwards');
+    } else if (value === 'no' && value !== this.rsvp && this.rsvp) {
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'), 'backwards');
+      generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'));
+    }
+
+    this.rsvp = value;
+  }
+
+  dinnerClick(e, clazz) {
+    const dinners = this.shadowRoot.querySelectorAll(clazz);
+    dinners.forEach(n => n !== e.target && n.removeAttribute('active'));
+  }
+
   close(e) {
     const form = this.shadowRoot.querySelector('#form');
     const grid = this.shadowRoot.querySelector('#grid');
@@ -35,6 +58,26 @@ class HomePage extends LitElement {
     form.style.pointerEvents = 'none';
     grid.style.opacity = 1;
     grid.style.filter = 'none';
+
+    const ironForm = this.shadowRoot.querySelector('iron-form');
+    ironForm.reset();
+    generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'), 'backwards');
+    generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'));
+    this.rsvp = undefined;
+  }
+
+  async submit(e) {
+    const ironForm = this.shadowRoot.querySelector('iron-form');
+    const form = ironForm.querySelector('form');
+
+    if (ironForm.validate()) {
+
+      this.close(e);
+    } else {
+      console.log('invalid form')
+    }
+
+
   }
 
   getCardClass(index) {
@@ -67,7 +110,7 @@ class HomePage extends LitElement {
         background: white;
         z-index: 10000;
         border-radius: 4px;
-        box-shadow: 0 3px 6px rgba(114,47,55,0.16), 0 3px 6px rgba(114,47,55,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         position: fixed;
         top: 25vh;
         left: calc(50% - 160px);
@@ -75,6 +118,7 @@ class HomePage extends LitElement {
         width: 320px;
         pointer-events: none;
         opacity: 0;
+        padding: 0 1rem 1rem 1rem;
       }
 
       #rsvp {
@@ -93,12 +137,39 @@ class HomePage extends LitElement {
         border-radius: 4px;
         border: none;
         box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
-        background-image: linear-gradient(90deg, #eed688 0%, #fffbcc 51%, #eed688 100%);
+        background-image: var(--button-style);
         pointer-events: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
+      }
+
+      iron-form, form {
+        height: 100%;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 4rem 4rem 3rem 18rem 1fr;
+      }
+
+      .input paper-input {
+        --paper-input-container: {
+          font-family: 'Lato', sans-serif;
+          font-weight: 400;
+        }
+      }
+
+      .submit {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+
+      .submit paper-button {
+
       }
 
       .card--expanded {
@@ -132,12 +203,160 @@ class HomePage extends LitElement {
         opacity: 1;
         /* transform: scale(1, 1); */
       }
+
+      .food-options {
+        position: relative;
+      }
+
+      .food-options .frontface,
+      .food-options .backface {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, .5);
+      }
+
+      .food-options .frontface {
+        transform: rotateY(180deg);
+      }
+
+      .food-options .backface {
+        opacity: 1;
+        filter: blur(5px);
+      }
+
+      .food-options paper-button {
+        --paper-button: {
+          font-size: .8rem;
+        };
+      }
+
+      .food-options .description {
+        font-size: .9rem;
+        line-height: 1rem;
+      }
+
+      .food-options .input{
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-gap: .5rem;
+        padding: .5rem 0;
+      }
+
+      .food-options h3 {
+        margin: .5rem 0;
+        font-weight: 300;
+        border-bottom: 1px solid var(--primary);
+        padding: .5rem 0;
+        font-size: 1rem;
+      }
+
+      paper-input {
+        --paper-input-container-focus-color: var(--primary);
+      }
+      paper-radio-button {
+        --paper-radio-button-checked-color: var(--primary);
+        --paper-radio-button-checked-ink-color: var(--primary);
+      }
+      paper-button {
+        --paper-button-ink-color: var(--accent);
+        --paper-button: {
+          text-transform: none;
+        }
+      }
+      paper-button[toggles][active] {
+        background: var(--primary);
+      }
     </style>
     <div id="form">
-      <span>
-        some form here
-      </span>
-      <button @click="${(e) => this.close(e)}">close</button>
+      <iron-form>
+        <form method="GET" action="https://script.google.com/macros/s/AKfycbwhPhp2d6x0lhYi7vkEGNJOONuIHngT-GZn_BAqudk-vJegxksE/exec">
+          <div class="input">
+            <paper-input name="name_one" label="Respondent One" required></paper-input>
+          </div>
+          <div class="input">
+            <paper-input name="name_two" label="Respondent Two" placeholder></paper-input>  
+          </div>
+          <div>
+            <div>
+              Will you be joining us for the night?
+            </div>
+            <paper-radio-group @change="${(e) => this.rsvpChange(e)}">  
+              <paper-radio-button name="rsvp_yes" value="yes">Yes</paper-radio-button>
+              <paper-radio-button name="rsvp_no" value="no">No</paper-radio-button>
+            </paper-radio-group>
+          </div>
+          
+          <div class="food-options">
+            <div class="frontface">
+              <h3>Respondent One's Dinner</h3>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Chicken</paper-button>
+              </div>
+              <div class="input">
+                <div class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Veggie</paper-button>
+              </div>
+              <h3>Respondent Two's Dinner</h3>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-two" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Chicken</paper-button>
+              </div>
+              <div class="input">
+                <div class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles class="dinner-two" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Veggie</paper-button>
+              </div>
+            </div>
+            <div class="backface">
+              <h3>Respondent One's Dinner</h3>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Chicken</paper-button>
+              </div>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Veggie</paper-button>
+              </div>
+              <h3>Respondent Two's Dinner</h3>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Chicken</paper-button>
+              </div>
+              <div class="input">
+                <div class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <paper-button toggles>Veggie</paper-button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="submit">
+            <paper-button @click="${(e) => this.close(e)}">Close</paper-button>
+            <paper-button @click="${(e) => this.submit(e)}">Submit</m-button>
+          </div>
+        </form>
+      </iron-form>
     </div>
     <section id="grid">
       <div id="rsvp">

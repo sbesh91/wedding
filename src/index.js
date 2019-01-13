@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element/lit-element';
+import { LitElement, html } from 'lit-element/lit-element';
 import { installRouter } from 'pwa-helpers/router';
 import { routes, navigate, generatePageTransitionAnimation, generateHeroTransitionAnimation, generateBaseLoadAnimation} from './app';
 import 'web-animations-js';

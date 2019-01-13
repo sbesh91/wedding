@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element/lit-element';
+import { LitElement, html } from 'lit-element/lit-element';
 
 // Create your custom component
 class AboutPage extends LitElement {

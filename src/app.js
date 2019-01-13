@@ -98,7 +98,39 @@ export const generateHeroOverlayAnimation = (toNode, fromNode, parentNode) => {
   };
 }
 
-export const generatePageTransitionAnimation = async (node, direction = 'forwards') => {
+export const generateFlipAnimation = (node, direction = 'forwards', axis = 'Y') => {
+  const duration = 1000;
+  const animationTimingConfig = {
+    fill: 'forwards',
+    easing: "ease-in-out",
+    duration: duration
+  };
+  let frames;
+
+  if (direction === 'forwards') {
+    frames = [
+      {transform: `translateZ(-200px) rotate${axis}(180deg) scale(1)`, opacity: 0},
+      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.15},
+      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.20},
+      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1, offset: 0.65},
+      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1, offset: 0.70},
+      {transform: `translateZ(-200px) rotate${axis}(0) scale(1)`, opacity: 1}
+    ];
+  } else {
+    frames = [
+      {transform: `translateZ(-200px) rotate${axis}(0) scale(1)`, opacity: 1},
+      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1,  offset: 0.15},
+      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1, offset: 0.20},
+      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.65},
+      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.70},
+      {transform: `translateZ(-200px) rotate${axis}(180deg) scale(1)`, opacity: 0}
+    ];
+  }
+
+  node.animate(frames, animationTimingConfig);
+}
+
+export const generatePageTransitionAnimation = (node, direction = 'forwards') => {
   const duration = 350;
   const clipStart = 'inset(10% 5% 10% 5%)';
   const clipEnd = 'inset(-6px -6px -6px -6px)';
