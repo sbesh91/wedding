@@ -30,6 +30,9 @@ class HomePage extends LitElement {
   }
 
   clickRsvp(e) {
+    const ironForm = this.shadowRoot.querySelector('iron-form');
+    ironForm.reset();
+    ironForm.style.display = 'block';
     generateHeroOverlayAnimation(this.shadowRoot.querySelector('#form'), e.target, this.shadowRoot.querySelector('#grid'));
   }
 
@@ -61,6 +64,7 @@ class HomePage extends LitElement {
 
     const ironForm = this.shadowRoot.querySelector('iron-form');
     ironForm.reset();
+    ironForm.style.display = 'none';
     generateFlipAnimation(this.shadowRoot.querySelector('.food-options .frontface'), 'backwards');
     generateFlipAnimation(this.shadowRoot.querySelector('.food-options .backface'));
     this.rsvp = undefined;
@@ -115,7 +119,7 @@ class HomePage extends LitElement {
         top: 25vh;
         left: calc(50% - 160px);
         height: 500px;
-        width: 320px;
+        width: calc(320px - 2rem);
         pointer-events: none;
         opacity: 0;
         padding: 0 1rem 1rem 1rem;
@@ -211,6 +215,7 @@ class HomePage extends LitElement {
       .food-options .frontface,
       .food-options .backface {
         backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         position: absolute;
         top: 0;
         left: 0;
@@ -276,10 +281,10 @@ class HomePage extends LitElement {
       <iron-form>
         <form method="GET" action="https://script.google.com/macros/s/AKfycbwhPhp2d6x0lhYi7vkEGNJOONuIHngT-GZn_BAqudk-vJegxksE/exec">
           <div class="input">
-            <paper-input name="name_one" label="Respondent One" required></paper-input>
+            <paper-input name="name_one" label="Guest One" required></paper-input>
           </div>
           <div class="input">
-            <paper-input name="name_two" label="Respondent Two" placeholder></paper-input>  
+            <paper-input name="name_two" label="Guest Two" placeholder></paper-input>  
           </div>
           <div>
             <div>
@@ -293,7 +298,7 @@ class HomePage extends LitElement {
           
           <div class="food-options">
             <div class="frontface">
-              <h3>Respondent One's Dinner</h3>
+              <h3>Guest One's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -306,7 +311,7 @@ class HomePage extends LitElement {
                 </div>
                 <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Veggie</paper-button>
               </div>
-              <h3>Respondent Two's Dinner</h3>
+              <h3>Guest Two's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -321,7 +326,7 @@ class HomePage extends LitElement {
               </div>
             </div>
             <div class="backface">
-              <h3>Respondent One's Dinner</h3>
+              <h3>Guest One's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -334,7 +339,7 @@ class HomePage extends LitElement {
                 </div>
                 <paper-button toggles>Veggie</paper-button>
               </div>
-              <h3>Respondent Two's Dinner</h3>
+              <h3>Guest Two's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
