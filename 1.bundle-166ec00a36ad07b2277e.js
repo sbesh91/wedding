@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(e,t,o){"use strict";o.r(t);var i=o(1),r=o(0);o(72),o(76),o(73),o(75),o(74),o(43),o(46),customElements.define("home-page",class extends i.a{constructor(){super(),this.images=[];for(let e=1;e<25;e++)this.images.push(e)}firstUpdated(){}clickRsvp(e){Object(r.c)(this.shadowRoot.querySelector("#form"),e.target,this.shadowRoot.querySelector("#grid"))}rsvpChange(e){const t=e.target.value;"yes"===t&&t!==this.rsvp?(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface")),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"),"backwards")):"no"===t&&t!==this.rsvp&&this.rsvp&&(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"))),this.rsvp=t}dinnerClick(e,t){this.shadowRoot.querySelectorAll(t).forEach(t=>t!==e.target&&t.removeAttribute("active"))}close(e){const t=this.shadowRoot.querySelector("#form"),o=this.shadowRoot.querySelector("#grid");Object(r.d)(t,"backwards"),t.style.pointerEvents="none",o.style.opacity=1,o.style.filter="none",this.shadowRoot.querySelector("iron-form").reset(),Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface")),this.rsvp=void 0}async submit(e){const t=this.shadowRoot.querySelector("iron-form");t.querySelector("form"),t.validate()?this.close(e):console.log("invalid form")}getCardClass(e){return["card--base","card--base","card--expanded","card--base","card--base"][e%5]}render(){return i["b"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(e,t,i){"use strict";i.r(t);var o=i(1),r=i(0);i(72),i(76),i(73),i(75),i(74),i(43),i(46),customElements.define("home-page",class extends o.a{constructor(){super(),this.images=[];for(let e=1;e<25;e++)this.images.push(e)}firstUpdated(){}clickRsvp(e){const t=this.shadowRoot.querySelector("iron-form");t.reset(),t.style.display="block",Object(r.c)(this.shadowRoot.querySelector("#form"),e.target,this.shadowRoot.querySelector("#grid"))}rsvpChange(e){const t=e.target.value;"yes"===t&&t!==this.rsvp?(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface")),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"),"backwards")):"no"===t&&t!==this.rsvp&&this.rsvp&&(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"))),this.rsvp=t}dinnerClick(e,t){this.shadowRoot.querySelectorAll(t).forEach(t=>t!==e.target&&t.removeAttribute("active"))}close(e){const t=this.shadowRoot.querySelector("#form"),i=this.shadowRoot.querySelector("#grid");Object(r.d)(t,"backwards"),t.style.pointerEvents="none",i.style.opacity=1,i.style.filter="none";const o=this.shadowRoot.querySelector("iron-form");o.reset(),o.style.display="none",Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface")),this.rsvp=void 0}async submit(e){const t=this.shadowRoot.querySelector("iron-form");t.querySelector("form"),t.validate()?this.close(e):console.log("invalid form")}getCardClass(e){return["card--base","card--base","card--expanded","card--base","card--base"][e%5]}render(){return o["b"]`
     <style>
       :host {
         width: 100%;
@@ -24,7 +24,7 @@
         top: 25vh;
         left: calc(50% - 160px);
         height: 500px;
-        width: 320px;
+        width: calc(320px - 2rem);
         pointer-events: none;
         opacity: 0;
         padding: 0 1rem 1rem 1rem;
@@ -120,6 +120,7 @@
       .food-options .frontface,
       .food-options .backface {
         backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         position: absolute;
         top: 0;
         left: 0;
@@ -185,10 +186,10 @@
       <iron-form>
         <form method="GET" action="https://script.google.com/macros/s/AKfycbwhPhp2d6x0lhYi7vkEGNJOONuIHngT-GZn_BAqudk-vJegxksE/exec">
           <div class="input">
-            <paper-input name="name_one" label="Respondent One" required></paper-input>
+            <paper-input name="name_one" label="Guest One" required></paper-input>
           </div>
           <div class="input">
-            <paper-input name="name_two" label="Respondent Two" placeholder></paper-input>  
+            <paper-input name="name_two" label="Guest Two" placeholder></paper-input>  
           </div>
           <div>
             <div>
@@ -202,7 +203,7 @@
           
           <div class="food-options">
             <div class="frontface">
-              <h3>Respondent One's Dinner</h3>
+              <h3>Guest One's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -215,7 +216,7 @@
                 </div>
                 <paper-button toggles class="dinner-one" @click="${e=>this.dinnerClick(e,".dinner-one")}">Veggie</paper-button>
               </div>
-              <h3>Respondent Two's Dinner</h3>
+              <h3>Guest Two's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -230,7 +231,7 @@
               </div>
             </div>
             <div class="backface">
-              <h3>Respondent One's Dinner</h3>
+              <h3>Guest One's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -243,7 +244,7 @@
                 </div>
                 <paper-button toggles>Veggie</paper-button>
               </div>
-              <h3>Respondent Two's Dinner</h3>
+              <h3>Guest Two's Dinner</h3>
               <div class="input">
                 <div class="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -275,10 +276,10 @@
         </div>
       </div>
 
-      ${this.images.map(e=>i["b"]`
+      ${this.images.map(e=>o["b"]`
         <main class="${this.getCardClass(e)}"> 
           <img data-toggle-class="active" src="./src/photos/${e}.jpg">
         </main>
       `)}      
     </section>
-    `}})},47:function(e,t,o){var i={"./1.jpg":[48,4],"./10.jpg":[49,5],"./11.jpg":[50,6],"./12.jpg":[51,7],"./13.jpg":[52,8],"./14.jpg":[53,9],"./15.jpg":[54,10],"./16.jpg":[55,11],"./17.jpg":[56,12],"./18.jpg":[57,13],"./19.jpg":[58,14],"./2.jpg":[59,15],"./20.jpg":[60,16],"./21.jpg":[61,17],"./22.jpg":[62,18],"./23.jpg":[63,19],"./24.jpg":[64,20],"./3.jpg":[65,21],"./4.jpg":[66,22],"./5.jpg":[67,23],"./6.jpg":[68,24],"./7.jpg":[69,25],"./8.jpg":[70,26],"./9.jpg":[71,27]};function r(e){var t=i[e];return t?o.e(t[1]).then(function(){var e=t[0];return o.t(e,7)}):Promise.resolve().then(function(){var t=new Error("Cannot find module '"+e+"'");throw t.code="MODULE_NOT_FOUND",t})}r.keys=function(){return Object.keys(i)},r.id=47,e.exports=r}}]);
+    `}})},47:function(e,t,i){var o={"./1.jpg":[48,4],"./10.jpg":[49,5],"./11.jpg":[50,6],"./12.jpg":[51,7],"./13.jpg":[52,8],"./14.jpg":[53,9],"./15.jpg":[54,10],"./16.jpg":[55,11],"./17.jpg":[56,12],"./18.jpg":[57,13],"./19.jpg":[58,14],"./2.jpg":[59,15],"./20.jpg":[60,16],"./21.jpg":[61,17],"./22.jpg":[62,18],"./23.jpg":[63,19],"./24.jpg":[64,20],"./3.jpg":[65,21],"./4.jpg":[66,22],"./5.jpg":[67,23],"./6.jpg":[68,24],"./7.jpg":[69,25],"./8.jpg":[70,26],"./9.jpg":[71,27]};function r(e){var t=o[e];return t?i.e(t[1]).then(function(){var e=t[0];return i.t(e,7)}):Promise.resolve().then(function(){var t=new Error("Cannot find module '"+e+"'");throw t.code="MODULE_NOT_FOUND",t})}r.keys=function(){return Object.keys(o)},r.id=47,e.exports=r}}]);
