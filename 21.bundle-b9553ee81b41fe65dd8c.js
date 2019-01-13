@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{26:function(o,p){o.exports="photos/16a885c9e00d2bb5da920598d4353b6d.jpg"}}]);
