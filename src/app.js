@@ -88,8 +88,8 @@ export const generateHeroOverlayAnimation = (toNode, fromNode, parentNode) => {
   toNode.style['transformOrigin'] = '0 0';
   toNode.style.zIndex = 10000;
   toNode.style.pointerEvents = 'auto';
-  parentNode.style.filter = 'blur(5px)';
-  parentNode.style.opacity = .8;
+  // parentNode.style.filter = 'blur(5px)';
+  parentNode.style.opacity = .7;
 
   const animation = toNode.animate(config.frames, config.animationTimingConfig);
 

@@ -75,7 +75,7 @@ class HomePage extends LitElement {
     const form = ironForm.querySelector('form');
 
     if (ironForm.validate()) {
-
+      form.submit();
       this.close(e);
     } else {
       console.log('invalid form')
@@ -208,6 +208,11 @@ class HomePage extends LitElement {
         /* transform: scale(1, 1); */
       }
 
+      .rsvp-radio {
+        position: relative;
+        z-index: 2;
+      }
+
       .food-options {
         position: relative;
       }
@@ -231,7 +236,21 @@ class HomePage extends LitElement {
 
       .food-options .backface {
         opacity: 1;
-        filter: blur(5px);
+        /* filter: blur(5px); */
+      }
+
+      .food-options .backface-content {
+        position: relative;
+      }
+
+      .food-options .backface-content::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, .8);
       }
 
       .food-options paper-button {
@@ -286,7 +305,7 @@ class HomePage extends LitElement {
           <div class="input">
             <paper-input name="name_two" label="Guest Two" placeholder></paper-input>  
           </div>
-          <div>
+          <div class="rsvp-radio">
             <div>
               Will you be joining us for the night?
             </div>
@@ -326,31 +345,33 @@ class HomePage extends LitElement {
               </div>
             </div>
             <div class="backface">
-              <h3>Guest One's Dinner</h3>
-              <div class="input">
-                <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              <div class="backface-content">
+                <h3>Guest One's Dinner</h3>
+                <div class="input">
+                  <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </div>
+                  <paper-button toggles>Chicken</paper-button>
                 </div>
-                <paper-button toggles>Chicken</paper-button>
-              </div>
-              <div class="input">
-                <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <div class="input">
+                  <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </div>
+                  <paper-button toggles>Veggie</paper-button>
                 </div>
-                <paper-button toggles>Veggie</paper-button>
-              </div>
-              <h3>Guest Two's Dinner</h3>
-              <div class="input">
-                <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <h3>Guest Two's Dinner</h3>
+                <div class="input">
+                  <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </div>
+                  <paper-button toggles>Chicken</paper-button>
                 </div>
-                <paper-button toggles>Chicken</paper-button>
-              </div>
-              <div class="input">
-                <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <div class="input">
+                  <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </div>
+                  <paper-button toggles>Veggie</paper-button>
                 </div>
-                <paper-button toggles>Veggie</paper-button>
               </div>
             </div>
           </div>
