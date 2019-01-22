@@ -35,6 +35,13 @@ class AppShell extends LitElement {
   }
 
   async viewChange(location, event) {
+    if (location.hash !== "") {
+      this.shadowRoot.querySelector('about-page').shadowRoot.querySelector(location.hash).scrollIntoView({
+        behavior: 'smooth'
+      });
+      return;
+    }
+
     if (!this.currentLocation) {
       await navigate(window.decodeURIComponent(location.pathname));
       const firstView = this.shadowRoot.querySelector(routes[location.pathname].selector);
