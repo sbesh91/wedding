@@ -54,9 +54,10 @@ class AppShell extends LitElement {
     const oldView = this.shadowRoot.querySelector(routes[this.currentLocation].selector);
     // const fromNode = oldView.shadowRoot.querySelector('div');
     generatePageTransitionAnimation(oldView, 'backwards');
-    // toss up a spinner
-    await navigate(window.decodeURIComponent(location.pathname));
     oldView.classList.remove('active');
+    // toss up a spinner
+    
+    await navigate(window.decodeURIComponent(location.pathname));
     this.currentLocation = location.pathname;
     
     const newView = this.shadowRoot.querySelector(routes[location.pathname].selector);

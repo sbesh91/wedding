@@ -50,21 +50,21 @@ const generateBaseHero = (toNode, fromNode, duration) => {
     delay: 150
   };
 
-  const clipStart = 'inset(10% 5% 10% 5%)';
-  const clipEnd = 'inset(-6px -6px -6px -6px)';
+  // const clipStart = 'inset(10% 5% 10% 5%)';
+  // const clipEnd = 'inset(-6px -6px -6px -6px)';
 
   const frames = [
     { 
       'transform': 'translate(' + deltaLeft + 'px,' + deltaTop + 'px) scale(' + deltaWidth + ',' + deltaHeight + ')',
       'opacity': .75,
-      'clipPath': clipStart,
-      '-webkitClipPath': clipStart
+      // 'clipPath': clipStart,
+      // '-webkitClipPath': clipStart
     },
     { 
       'transform': 'none',
       'opacity': 1,
-      'clipPath': clipEnd,
-      '-webkitClipPath': clipEnd
+      // 'clipPath': clipEnd,
+      // '-webkitClipPath': clipEnd
     }
   ];
   
@@ -131,19 +131,19 @@ export const generateFlipAnimation = (node, direction = 'forwards', axis = 'Y') 
 }
 
 export const generatePageTransitionAnimation = (node, direction = 'forwards') => {
-  const duration = 350;
-  const clipStart = 'inset(10% 5% 10% 5%)';
-  const clipEnd = 'inset(-6px -6px -6px -6px)';
+  const duration = 450;
+  // const clipStart = 'inset(10% 5% 10% 5%)';
+  // const clipEnd = 'inset(-6px -6px -6px -6px)';
   const baseFrame = { 
     // 'transform': 'none',
-    'clipPath': clipEnd,
-    '-webkitClipPath': clipEnd,
+    // 'clipPath': clipEnd,
+    // '-webkitClipPath': clipEnd,
     'opacity': 1 
   };
   const modFrame = { 
     // 'transform': 'translateY(-50px)',
-    'clipPath': clipStart,
-    '-webkitClipPath': clipStart,
+    // 'clipPath': clipStart,
+    // '-webkitClipPath': clipStart,
     'opacity': 0 
   };
   const animationTimingConfig = {
