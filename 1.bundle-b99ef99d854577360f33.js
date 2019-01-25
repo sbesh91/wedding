@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(e,t,o){"use strict";o.r(t);var i=o(1),r=o(0);o(74),o(78),o(75),o(77),o(76),o(43),o(46),customElements.define("home-page",class extends i.a{constructor(){super(),this.images=[];for(let e=1;e<25;e++)this.images.push(e)}firstUpdated(){}clickRsvp(e){const t=this.shadowRoot.querySelector("iron-form");t.reset(),t.style.display="block",Object(r.c)(this.shadowRoot.querySelector("#form"),e.target,this.shadowRoot.querySelector("#grid"))}rsvpChange(e){const t=e.target.value;"yes"===t&&t!==this.rsvp?(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface")),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"),"backwards")):"no"===t&&t!==this.rsvp&&this.rsvp&&(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"))),this.rsvp=t}dinnerClick(e,t){this.shadowRoot.querySelectorAll(t).forEach(t=>t!==e.target&&t.removeAttribute("active"))}close(e){const t=this.shadowRoot.querySelector("#form"),o=this.shadowRoot.querySelector("#grid");Object(r.d)(t,"backwards"),t.style.pointerEvents="none",o.style.opacity=1,o.style.filter="none";const i=this.shadowRoot.querySelector("iron-form");i.reset(),i.style.display="none",Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface")),this.rsvp=void 0}async submit(e){const t=this.shadowRoot.querySelector("iron-form"),o=t.querySelector("form");t.validate()?(o.submit(),this.close(e)):console.log("invalid form")}getCardClass(e){return["card--base","card--base","card--expanded","card--base","card--base"][e%5]}render(){return i["b"]`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(e,t,o){"use strict";o.r(t);var i=o(1),r=o(0);o(74),o(78),o(75),o(77),o(76),o(43),o(46),customElements.define("home-page",class extends i.a{constructor(){super(),this.images=[];for(let e=1;e<25;e++)this.images.push(e)}firstUpdated(){}clickRsvp(e){const t=this.shadowRoot.querySelector("iron-form");t.reset(),t.style.display="block",Object(r.c)(this.shadowRoot.querySelector("#form"),e.target,this.shadowRoot.querySelector("#grid"))}rsvpChange(e){const t=e.target.value;"yes"===t&&t!==this.rsvp?(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface")),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"),"backwards")):"no"===t&&t!==this.rsvp&&this.rsvp&&(Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface"))),this.rsvp=t}dinnerClick(e,t){this.shadowRoot.querySelectorAll(t).forEach(t=>t!==e.target&&t.removeAttribute("active"))}close(e){const t=this.shadowRoot.querySelector("#form"),o=this.shadowRoot.querySelector("#grid");Object(r.d)(t,"backwards"),t.style.pointerEvents="none",o.style.opacity=1,o.style.filter="none";const i=this.shadowRoot.querySelector("iron-form");i.reset(),i.style.display="none",Object(r.b)(this.shadowRoot.querySelector(".food-options .frontface"),"backwards"),Object(r.b)(this.shadowRoot.querySelector(".food-options .backface")),this.rsvp=void 0}async submit(e){const t=this.shadowRoot.querySelector("iron-form"),o=t.querySelector("form");if(t.validate()){let a=t.serializeForm(),s={};a.rsvp_yes?(s={dinner_one:this.shadowRoot.querySelector(".dinner-one[active]").dataset.value,dinner_two:this.shadowRoot.querySelector(".dinner-two[active]").dataset.value},a.rsvp_no=""):a.rsvp_yes="",s=Object.assign(s,a);var i=new FormData;for(var r in s)i.append(r,s[r]);fetch(o.action,{method:"POST",body:i}),this.close(e)}else console.log("invalid form")}getCardClass(e){return["card--base","card--base","card--expanded","card--base","card--base"][e%5]}render(){return i["b"]`
     <style>
       :host {
         width: 100%;
@@ -28,6 +28,7 @@
         pointer-events: none;
         opacity: 0;
         padding: 0 1rem 1rem 1rem;
+        will-change: transform, opacity;
       }
 
       #rsvp {
@@ -164,16 +165,23 @@
         };
       }
 
+      .food-options paper-button[active] {
+        --paper-button: {
+          font-size: .8rem;
+          color: white;
+        };
+      }
+
       .food-options .description {
-        font-size: .9rem;
-        line-height: 1rem;
+        font-size: .8rem;
+        line-height: .9rem;
       }
 
       .food-options .input{
         display: grid;
         grid-template-columns: 1fr auto;
         grid-gap: .5rem;
-        padding: .5rem 0;
+        padding: .25rem 0;
       }
 
       .food-options h3 {
@@ -192,13 +200,14 @@
         --paper-radio-button-checked-ink-color: var(--primary);
       }
       paper-button {
+        transition: background-color 300ms ease-in;
         --paper-button-ink-color: var(--accent);
         --paper-button: {
           text-transform: none;
         }
       }
       paper-button[toggles][active] {
-        background: var(--primary);
+        background-color: var(--primary);
       }
     </style>
     <div id="form">
@@ -225,28 +234,28 @@
               <h3>Guest One's Dinner</h3>
               <div class="input">
                 <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                 </div>
-                <paper-button toggles class="dinner-one" @click="${e=>this.dinnerClick(e,".dinner-one")}">Chicken</paper-button>
+                <paper-button toggles class="dinner-one" data-value="chicken" @click="${e=>this.dinnerClick(e,".dinner-one")}">Chicken</paper-button>
               </div>
               <div class="input">
                 <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Cheese stuffed tortellini topped with creamy Alfredo sauce.
                 </div>
-                <paper-button toggles class="dinner-one" @click="${e=>this.dinnerClick(e,".dinner-one")}">Veggie</paper-button>
+                <paper-button toggles class="dinner-one" data-value="tortellini" @click="${e=>this.dinnerClick(e,".dinner-one")}">Tortellini</paper-button>
               </div>
               <h3>Guest Two's Dinner</h3>
               <div class="input">
                 <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                 </div>
-                <paper-button toggles class="dinner-two" @click="${e=>this.dinnerClick(e,".dinner-two")}">Chicken</paper-button>
+                <paper-button toggles class="dinner-two" data-value="chicken" @click="${e=>this.dinnerClick(e,".dinner-two")}">Chicken</paper-button>
               </div>
               <div class="input">
                 <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Cheese stuffed tortellini topped with creamy Alfredo sauce.
                 </div>
-                <paper-button toggles class="dinner-two" @click="${e=>this.dinnerClick(e,".dinner-two")}">Veggie</paper-button>
+                <paper-button toggles class="dinner-two" data-value="tortellini" @click="${e=>this.dinnerClick(e,".dinner-two")}">Tortellini</paper-button>
               </div>
             </div>
             <div class="backface">
@@ -254,28 +263,28 @@
                 <h3>Guest One's Dinner</h3>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                   </div>
                   <paper-button toggles>Chicken</paper-button>
                 </div>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Cheese stuffed tortellini topped with creamy Alfredo sauce.
                   </div>
-                  <paper-button toggles>Veggie</paper-button>
+                  <paper-button toggles>Tortellini</paper-button>
                 </div>
                 <h3>Guest Two's Dinner</h3>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                   </div>
                   <paper-button toggles>Chicken</paper-button>
                 </div>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Cheese stuffed tortellini topped with creamy Alfredo sauce.
                   </div>
-                  <paper-button toggles>Veggie</paper-button>
+                  <paper-button toggles>Tortellini</paper-button>
                 </div>
               </div>
             </div>
