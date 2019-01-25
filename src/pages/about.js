@@ -28,7 +28,7 @@ class AboutPage extends LitElement {
       }
       .content {
         max-width: 800px;
-        padding: 2rem 0;
+        padding: 2rem 1rem;
         margin: 2rem auto;
         background: white;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -85,8 +85,7 @@ class AboutPage extends LitElement {
         margin-top: 1rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-auto-rows: minmax(1fr, auto);
-        grid-gap: 1rem;
+        grid-gap: 2rem;
       }
 
       .person h5 {

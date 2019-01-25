@@ -75,7 +75,34 @@ class HomePage extends LitElement {
     const form = ironForm.querySelector('form');
 
     if (ironForm.validate()) {
-      form.submit();
+      let serialize = ironForm.serializeForm();
+      let data = {};
+
+      if (serialize.rsvp_yes) {
+        const dinnerOne = this.shadowRoot.querySelector('.dinner-one[active]').dataset.value;
+        const dinnerTwo = this.shadowRoot.querySelector('.dinner-two[active]').dataset.value;
+        data = {
+          dinner_one: dinnerOne,
+          dinner_two: dinnerTwo,
+        };
+        serialize.rsvp_no = '';
+      } else {
+        serialize.rsvp_yes = '';
+      }
+
+      data = Object.assign(data, serialize);
+
+      var form_data = new FormData();
+
+      for (var key in data) {
+          form_data.append(key, data[key]);
+      }
+      
+      fetch(form.action, {
+        method: 'POST',
+        body: form_data
+      });
+
       this.close(e);
     } else {
       console.log('invalid form')
@@ -123,6 +150,7 @@ class HomePage extends LitElement {
         pointer-events: none;
         opacity: 0;
         padding: 0 1rem 1rem 1rem;
+        will-change: transform, opacity;
       }
 
       #rsvp {
@@ -259,16 +287,23 @@ class HomePage extends LitElement {
         };
       }
 
+      .food-options paper-button[active] {
+        --paper-button: {
+          font-size: .8rem;
+          color: white;
+        };
+      }
+
       .food-options .description {
-        font-size: .9rem;
-        line-height: 1rem;
+        font-size: .8rem;
+        line-height: .9rem;
       }
 
       .food-options .input{
         display: grid;
         grid-template-columns: 1fr auto;
         grid-gap: .5rem;
-        padding: .5rem 0;
+        padding: .25rem 0;
       }
 
       .food-options h3 {
@@ -287,13 +322,14 @@ class HomePage extends LitElement {
         --paper-radio-button-checked-ink-color: var(--primary);
       }
       paper-button {
+        transition: background-color 300ms ease-in;
         --paper-button-ink-color: var(--accent);
         --paper-button: {
           text-transform: none;
         }
       }
       paper-button[toggles][active] {
-        background: var(--primary);
+        background-color: var(--primary);
       }
     </style>
     <div id="form">
@@ -320,28 +356,28 @@ class HomePage extends LitElement {
               <h3>Guest One's Dinner</h3>
               <div class="input">
                 <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                 </div>
-                <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Chicken</paper-button>
+                <paper-button toggles class="dinner-one" data-value="chicken" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Chicken</paper-button>
               </div>
               <div class="input">
                 <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Cheese stuffed tortellini topped with creamy Alfredo sauce.
                 </div>
-                <paper-button toggles class="dinner-one" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Veggie</paper-button>
+                <paper-button toggles class="dinner-one" data-value="tortellini" @click="${(e) => this.dinnerClick(e, '.dinner-one')}">Tortellini</paper-button>
               </div>
               <h3>Guest Two's Dinner</h3>
               <div class="input">
                 <div class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                 </div>
-                <paper-button toggles class="dinner-two" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Chicken</paper-button>
+                <paper-button toggles class="dinner-two" data-value="chicken" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Chicken</paper-button>
               </div>
               <div class="input">
                 <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Cheese stuffed tortellini topped with creamy Alfredo sauce.
                 </div>
-                <paper-button toggles class="dinner-two" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Veggie</paper-button>
+                <paper-button toggles class="dinner-two" data-value="tortellini" @click="${(e) => this.dinnerClick(e, '.dinner-two')}">Tortellini</paper-button>
               </div>
             </div>
             <div class="backface">
@@ -349,28 +385,28 @@ class HomePage extends LitElement {
                 <h3>Guest One's Dinner</h3>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                   </div>
                   <paper-button toggles>Chicken</paper-button>
                 </div>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Cheese stuffed tortellini topped with creamy Alfredo sauce.
                   </div>
-                  <paper-button toggles>Veggie</paper-button>
+                  <paper-button toggles>Tortellini</paper-button>
                 </div>
                 <h3>Guest Two's Dinner</h3>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Stuffed with mozzarella, tomatoes, and spinach. Topped with basil pesto cream sauce
                   </div>
                   <paper-button toggles>Chicken</paper-button>
                 </div>
                 <div class="input">
                   <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Cheese stuffed tortellini topped with creamy Alfredo sauce.
                   </div>
-                  <paper-button toggles>Veggie</paper-button>
+                  <paper-button toggles>Tortellini</paper-button>
                 </div>
               </div>
             </div>
