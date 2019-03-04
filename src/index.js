@@ -37,7 +37,8 @@ class AppShell extends LitElement {
   async viewChange(location, event) {
     if (location.hash !== "") {
       this.shadowRoot.querySelector('about-page').shadowRoot.querySelector(location.hash).scrollIntoView({
-        behavior: 'smooth'
+        behavior: 'smooth',
+        block: 'start'
       });
       return;
     }
@@ -121,7 +122,7 @@ class AppShell extends LitElement {
         position: relative;
         visibility: hidden;
         height: calc(100% + 1rem);
-        fill: #616161;
+        fill: var(--grey);
         margin-top: -.5rem;
       }
 
