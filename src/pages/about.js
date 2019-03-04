@@ -60,7 +60,7 @@ class AboutPage extends LitElement {
       span {
         display: block;
         font-size: 1rem;
-        line-height: 1.2rem;
+        line-height: 1.4rem;
         margin: .5rem 1rem;
       }
       a {
@@ -79,6 +79,7 @@ class AboutPage extends LitElement {
       .block {
         max-width: 700px;
         margin: 1rem auto;
+        padding-top: 4.25rem;
       }
 
       #grid {
@@ -106,6 +107,7 @@ class AboutPage extends LitElement {
         <span>Here, have some quick links to stuff</span>
         <span>
           <a href="#location" no-nav>Location</a>
+          <a href="#times" no-nav>Times</a>
           <a href="#registry" no-nav>Registry</a>
           <a href="#faq" no-nav>FAQ</a>
           <a href="#people" no-nav>People</a>
@@ -118,6 +120,12 @@ class AboutPage extends LitElement {
           3165 Shadyside Dr, Stoughton, WI 53589
         </span>
         <iframe width="100%" height="400" src="https://maps.google.com/maps?width=100%&amp;height=300&amp;hl=en&amp;q=3165%20Shadyside%20Dr%2C%20Stoughton%2C%20WI%2053589+(Stoughton%20Country%20Club)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+      </div>
+      <div id="times" class="block">
+        <h4>Times</h4>
+        <span>
+          
+        </span>
       </div>
       <div id="registry" class="block">
         <h4>Registry</h4>
@@ -140,12 +148,6 @@ class AboutPage extends LitElement {
           Can I bring my kids?
           <span>
             Only kids at heart! Trust us, we love your kids, but we want you to party with us without having to keep track of your kids all night (you totally deserve a break). And we’re not providing babysitters at the venue.
-          </span>
-        </h4>
-        <h4>
-          Is there a shuttle to and from the hotel and ceremony?
-          <span>
-            ...
           </span>
         </h4>
         <h4>
