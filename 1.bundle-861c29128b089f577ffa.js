@@ -21,22 +21,29 @@
         border-radius: 4px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         position: fixed;
-        top: 25vh;
+        top: 80px;
         left: calc(50% - 160px);
-        height: 500px;
+        height: 450px;
         width: calc(320px - 2rem);
         pointer-events: none;
         opacity: 0;
         padding: 0 1rem 1rem 1rem;
         will-change: transform, opacity;
+        overflow-y: auto;
       }
 
       #rsvp {
         grid-column: 1 / -1;
         grid-row: 1;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+      #rsvp p {
+        font-size: 3rem;
+        color: var(--grey);
+        text-align: center;
       }
       #rsvp div {
         width: 18rem;
@@ -62,7 +69,7 @@
       form {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 4rem 4rem 3rem 18rem 1fr;
+        grid-template-rows: 4rem 4rem 3rem 6rem 18rem 3rem;
       }
 
       .input paper-input {
@@ -75,11 +82,7 @@
       .submit {
         display: flex;
         justify-content: flex-end;
-        align-items: flex-end;
-      }
-
-      .submit paper-button {
-
+        align-items: flex-start;
       }
 
       .card--expanded {
@@ -117,6 +120,9 @@
       .rsvp-radio {
         position: relative;
         z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
 
       .food-options {
@@ -147,6 +153,7 @@
 
       .food-options .backface-content {
         position: relative;
+        transform: rotateY(180deg);
       }
 
       .food-options .backface-content::after {
@@ -204,6 +211,7 @@
         --paper-button-ink-color: var(--accent);
         --paper-button: {
           text-transform: none;
+          background: white;
         }
       }
       paper-button[toggles][active] {
@@ -214,14 +222,15 @@
       <iron-form>
         <form method="GET" action="https://script.google.com/macros/s/AKfycbwhPhp2d6x0lhYi7vkEGNJOONuIHngT-GZn_BAqudk-vJegxksE/exec">
           <div class="input">
-            <paper-input name="name_one" label="Guest One" required></paper-input>
+            <paper-input name="name_one" label="Guest One's Name" required></paper-input>
           </div>
           <div class="input">
-            <paper-input name="name_two" label="Guest Two" placeholder></paper-input>  
+            <paper-input name="name_two" label="Guest Two's Name"></paper-input>  
           </div>
+          <div class="split"></div>
           <div class="rsvp-radio">
             <div>
-              Will you be joining us for the night?
+              Will you be joining us for the on September 28th, 2019?
             </div>
             <paper-radio-group @change="${e=>this.rsvpChange(e)}">  
               <paper-radio-button name="rsvp_yes" value="yes">Yes</paper-radio-button>
@@ -290,7 +299,6 @@
             </div>
           </div>
 
-
           <div class="submit">
             <paper-button @click="${e=>this.close(e)}">Close</paper-button>
             <paper-button @click="${e=>this.submit(e)}">Submit</m-button>
@@ -300,6 +308,7 @@
     </div>
     <section id="grid">
       <div id="rsvp">
+        <p>September 28th, 2019</p>
         <div @click="${e=>this.clickRsvp(e)}">
           <mwc-ripple></mwc-ripple>
           RSVP
