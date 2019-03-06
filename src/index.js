@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit-element/lit-element';
 import { installRouter } from 'pwa-helpers/router';
-import { routes, navigate, generatePageTransitionAnimation, generateHeroTransitionAnimation, generateBaseLoadAnimation} from './app';
+import { routes, navigate} from './app';
+import { generatePageTransitionAnimation, generateBaseLoadAnimation } from 'tools';
 import 'web-animations-js';
 
 // Create your custom component

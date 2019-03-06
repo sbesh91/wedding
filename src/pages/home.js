@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element/lit-element';
-import { generateHeroOverlayAnimation, generatePageTransitionAnimation, generateFlipAnimation } from '../app';
+import { generateHeroOverlayAnimation, generatePageTransitionAnimation, generateFlipAnimation } from 'tools';
 import '@material/mwc-ripple';
 import '@polymer/iron-form/iron-form';
 import '@polymer/paper-input/paper-input';
