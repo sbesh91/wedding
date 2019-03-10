@@ -170,6 +170,7 @@ class HomePage extends LitElement {
       #rsvp div {
         width: 18rem;
         height: 5rem;
+        margin-bottom: 1rem;
         font-size: 3rem;
         line-height: 3rem;
         color: #616161;
