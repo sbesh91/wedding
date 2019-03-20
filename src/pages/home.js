@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element/lit-element';
-import { generateHeroOverlayAnimation, generatePageTransitionAnimation, generateFlipAnimation } from '../app';
+import { generateHeroOverlayAnimation, generatePageTransitionAnimation, generateFlipAnimation } from 'tools';
 import '@material/mwc-ripple';
 import '@polymer/iron-form/iron-form';
 import '@polymer/paper-input/paper-input';
@@ -170,6 +170,7 @@ class HomePage extends LitElement {
       #rsvp div {
         width: 18rem;
         height: 5rem;
+        margin-bottom: 1rem;
         font-size: 3rem;
         line-height: 3rem;
         color: #616161;
@@ -352,7 +353,7 @@ class HomePage extends LitElement {
           <div class="split"></div>
           <div class="rsvp-radio">
             <div>
-              Will you be joining us for the on September 28th, 2019?
+              Will you be joining us for the wedding on September 28th, 2019?
             </div>
             <paper-radio-group @change="${(e) => this.rsvpChange(e)}">  
               <paper-radio-button name="rsvp_yes" value="yes">Yes</paper-radio-button>

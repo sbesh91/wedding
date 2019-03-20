@@ -95,8 +95,12 @@ class AboutPage extends LitElement {
 
       .title {
         border-bottom: 1px solid rgba(0,0,0,0.23);
-        margin-bottom: .5rem;
-        padding-bottom: .5rem
+        margin-bottom:  1rem;
+        padding-bottom: 1rem;
+      }
+      .title-no-border {
+        margin-bottom:  1rem;
+        padding-bottom: 1rem;
       }
     </style>
     <div class="content">
@@ -114,7 +118,7 @@ class AboutPage extends LitElement {
         </span>
       </div>
       <div id="location" class="block">
-        <h4>Location</h4>
+        <h4 class="title">Location</h4>
         <span>
           Stoughton Country Club
           3165 Shadyside Dr, Stoughton, WI 53589
@@ -122,13 +126,13 @@ class AboutPage extends LitElement {
         <iframe width="100%" height="400" src="https://maps.google.com/maps?width=100%&amp;height=300&amp;hl=en&amp;q=3165%20Shadyside%20Dr%2C%20Stoughton%2C%20WI%2053589+(Stoughton%20Country%20Club)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
       </div>
       <div id="times" class="block">
-        <h4>Times</h4>
+        <h4 class="title">Times</h4>
         <span>
           
         </span>
       </div>
       <div id="registry" class="block">
-        <h4>Registry</h4>
+        <h4 class="title">Registry</h4>
         <span>
           We’ve got everything we need for our home, so please don’t get us any toasters or dishes or towels. Instead, contribute to our Honeymoon Fund! We’ll also have a donation box at our reception for cash gifts.
           <a href="https://www.zola.com/registry/beshenskythibeau" target="_blank">
@@ -137,26 +141,26 @@ class AboutPage extends LitElement {
         </span>
       </div>
       <div id="faq" class="block">
-        <h4>FAQ</h4>
-        <h4>
+        <h4 class="title">FAQ</h4>
+        <h4 class="title-no-border">
           When are RSVPs due?
           <span>
-            Please RSVP by XX/XX/XXXX to make sure we save your seat! If you can’t make it, please let us know. If we don’t hear from you, we’ll just assume you hate us.
+            Please RSVP by 8/28/2019 to make sure we save your seat! If you can’t make it, please let us know. If we don’t hear from you, we’ll just assume you hate us.
           </span>
         </h4>
-        <h4>
+        <h4 class="title-no-border">
           Can I bring my kids?
           <span>
             Only kids at heart! Trust us, we love your kids, but we want you to party with us without having to keep track of your kids all night (you totally deserve a break). And we’re not providing babysitters at the venue.
           </span>
         </h4>
-        <h4>
+        <h4 class="title-no-border">
           Can I bring a date?
           <span>
             If your invitation says “and Guest,” feel free! If not, we can’t afford to feed an extra person, so they’ll have to stay home.
           </span>
         </h4>
-        <h4>
+        <h4 class="title-no-border">
           What's the dress code?
           <span>
             Suggestions for Ladies: dress, skirt and a nice top, dress pants and a blouse, dressy jumpsuit, you get it. Look fabulous (but not as fabulous as Ashley!)
@@ -173,13 +177,13 @@ class AboutPage extends LitElement {
             4. Our bridesmaids are wearing long, wine/burgundy colored dresses and the groomsmen are in blue suits, so it would be best to try not to match them!
           </span>
         </h4>
-        <h4>
+        <h4 class="title-no-border">
           You said you don’t want gifts, but...?
           <span>
             If it’s a handmade gift or something super special and personal, we’d love it! If it’s a plain old gift from a store, we’d rather you donate toward our European excursion. And if you can’t afford a gift, we totally understand. It means more to us that you can just spend the evening with us.
           </span>
         </h4>
-        <h4>
+        <h4 class="title-no-border">
           I have so many more questions about the wedding, who am I gonna call??
           <span>
             Ghostbusters! ...Or just Steve (414) 324-3801 and Ashley (715) 892-9436
