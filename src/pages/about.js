@@ -145,7 +145,7 @@ class AboutPage extends LitElement {
         <h4 class="title-no-border">
           When are RSVPs due?
           <span>
-            Please RSVP by XX/XX/XXXX to make sure we save your seat! If you can’t make it, please let us know. If we don’t hear from you, we’ll just assume you hate us.
+            Please RSVP by 8/28/2019 to make sure we save your seat! If you can’t make it, please let us know. If we don’t hear from you, we’ll just assume you hate us.
           </span>
         </h4>
         <h4 class="title-no-border">

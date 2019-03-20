@@ -353,7 +353,7 @@ class HomePage extends LitElement {
           <div class="split"></div>
           <div class="rsvp-radio">
             <div>
-              Will you be joining us for the on September 28th, 2019?
+              Will you be joining us for the wedding on September 28th, 2019?
             </div>
             <paper-radio-group @change="${(e) => this.rsvpChange(e)}">  
               <paper-radio-button name="rsvp_yes" value="yes">Yes</paper-radio-button>
