@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{78:function(n,e,o){"use strict";o.r(e);var s=o(0);customElements.define("not-found",class extends s.a{constructor(){super()}render(){return s["b"]`<p>not found page</p>`}})}}]);
