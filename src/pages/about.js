@@ -113,10 +113,12 @@ class AboutPage extends LitElement {
           <a href="#location" no-nav>Location</a>
           <a href="#times" no-nav>Times</a>
           <a href="#registry" no-nav>Registry</a>
+          <a href="#hotel" no-nav>Hotel</a>
           <a href="#faq" no-nav>FAQ</a>
           <a href="#people" no-nav>People</a>
         </span>
       </div>
+
       <div id="location" class="block">
         <h4 class="title">Location</h4>
         <span>
@@ -125,12 +127,22 @@ class AboutPage extends LitElement {
         </span>
         <iframe width="100%" height="400" src="https://maps.google.com/maps?width=100%&amp;height=300&amp;hl=en&amp;q=3165%20Shadyside%20Dr%2C%20Stoughton%2C%20WI%2053589+(Stoughton%20Country%20Club)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
       </div>
+
       <div id="times" class="block">
         <h4 class="title">Times</h4>
         <span>
           
         </span>
       </div>
+
+      <div id="hotel" class="block">
+        <h4>Hotel</h4>
+        <span>
+          We're set up at a hotel right down the street from our apartment.&nbsp;
+          <a href="https://www.choicehotels.com/reservations/groups/PO54F2" target="_blank">Click here to register your room</a>
+        </span>
+      </div>
+
       <div id="registry" class="block">
         <h4 class="title">Registry</h4>
         <span>
@@ -140,6 +152,7 @@ class AboutPage extends LitElement {
           </a>
         </span>
       </div>
+      
       <div id="faq" class="block">
         <h4 class="title">FAQ</h4>
         <h4 class="title-no-border">
@@ -190,6 +203,7 @@ class AboutPage extends LitElement {
           </span>
         </h4>
       </div>
+
       <div id="people" class="block">
         <h3>
           Who's Who
