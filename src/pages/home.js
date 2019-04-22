@@ -80,7 +80,8 @@ class HomePage extends LitElement {
 
       if (serialize.rsvp_yes) {
         const dinnerOne = this.shadowRoot.querySelector('.dinner-one[active]').dataset.value;
-        const dinnerTwo = this.shadowRoot.querySelector('.dinner-two[active]').dataset.value;
+        const dinnerTwoRef = this.shadowRoot.querySelector('.dinner-two[active]');
+        const dinnerTwo = dinnerTwoRef ? dinnerTwoRef.dataset.value : '';
         data = {
           dinner_one: dinnerOne,
           dinner_two: dinnerTwo,
@@ -95,7 +96,7 @@ class HomePage extends LitElement {
       var form_data = new FormData();
 
       for (var key in data) {
-          form_data.append(key, data[key]);
+          form_data.append(key, data[key] ? data[key] : '');
       }
       
       fetch(form.action, {
