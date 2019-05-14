@@ -108,7 +108,7 @@ class AboutPage extends LitElement {
         <h3>
           Welcome to the Beshensky and Thibeau Wedding!
         </h3>
-        <span>Here, have some quick links to stuff</span>
+        <span>Here are some quick links</span>
         <span>
           <a href="#location" no-nav>Location</a>
           <a href="#times" no-nav>Times</a>
@@ -131,14 +131,25 @@ class AboutPage extends LitElement {
       <div id="times" class="block">
         <h4 class="title">Times</h4>
         <span>
-          
+          4pm Ceremony (outdoors)
+        </span>
+        <span>
+          Cocktails following the Ceremony
+        </span>
+        <span>
+          6pm Dinner
         </span>
       </div>
 
       <div id="hotel" class="block">
-        <h4>Hotel</h4>
+        <h4 class="title">Hotel</h4>
         <span>
-          We're set up at a hotel right down the street from our apartment.&nbsp;
+          We have a block reserved under the Beshensky-Thibeau wedding at the Sleep Inn &amp; Suites
+        </span>
+        <span>
+          4802 Tradewinds Parkway, Madison, WI, 53718
+        </span>
+        <span>
           <a href="https://www.choicehotels.com/reservations/groups/PO54F2" target="_blank">Click here to register your room</a>
         </span>
       </div>
@@ -158,7 +169,7 @@ class AboutPage extends LitElement {
         <h4 class="title-no-border">
           When are RSVPs due?
           <span>
-            Please RSVP by 8/28/2019 to make sure we save your seat! If you can’t make it, please let us know. If we don’t hear from you, we’ll just assume you hate us.
+            Please RSVP by 8/28/2019 to make sure we save your seat! If you can’t make it, please let us know.
           </span>
         </h4>
         <h4 class="title-no-border">
@@ -176,9 +187,16 @@ class AboutPage extends LitElement {
         <h4 class="title-no-border">
           What's the dress code?
           <span>
-            Suggestions for Ladies: dress, skirt and a nice top, dress pants and a blouse, dressy jumpsuit, you get it. Look fabulous (but not as fabulous as Ashley!)
+            Suggestions for Ladies:
             <br/>
-            Suggestions for Men: suit and tie, slacks and button up, clean pants and your best collared shirt that doesn’t have a stain on it... good enough!
+            Dress, skirt and a nice top, dress pants and a blouse, dressy jumpsuit, you get it. Look fabulous (but not as fabulous as Ashley!)
+          </span>
+          <span>
+            Suggestions for Men:
+            <br/>
+            Suit and tie, slacks and button up, clean pants and your best collared shirt that doesn’t have a stain on it... good enough!
+          </span>
+          <span>
             What Not to Wear:
             <br/>
             1. Obviously, don’t wear white 
